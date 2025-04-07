@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}{{ car.model }}{% endblock %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f7f8fc;
+        color: #333;
+    }
+    .car-page {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 40px;
+    }
+    .left-col, .right-col {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .left-col {
+        flex: 1;
+        min-width: 50%;
+    }
+    .right-col {
+        flex: 1;
+        min-width: 40%;
+    }
+    .main-image img {
+        width: 100%;
+        border-radius: 10px;
+    }
+    .gallery {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+    .gallery img {
+        width: 80px;
+        height: auto;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .tabs button {
+        flex: 1;
+        padding: 10px;
+        background: #f0f0f0;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .tabs button.active {
+        background: #d9534f;
+        color: #fff;
+    }
+    .car-detail-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+    .car-detail-item span {
+        flex-grow: 1;
+        border-bottom: 1px dotted #ddd;
+        margin: 0 10px;
+    }
+    .price {
+        font-size: 2rem;
+        color: #d9534f;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    .back-btn {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container car-page">
+    <!-- Left Column -->
+    <div class="left-col">
+        <div class="main-image">
+            <img src="{{ url_for('static', filename='foto_auto/' + car.slug + '/' + (car.images[0] if car.images else 'default.jpg')) }}" alt="{{ car.model }}">
+        </div>
+        <div class="gallery">
+            {% for img in car.alt_images %}
+                <img src="{{ img }}" alt="Additional image">
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-col">
+        <h2>{{ car.model }} {{ car.year }}</h2>
+        <div class="tabs">
+            <button class="active">Specificații</button>
+
+        </div>
+
+        <!-- Car Details -->
+        <div class="car-detail-item"><strong>Model</strong><span></span>{{ car.model }}</div>
+        <div class="car-detail-item"><strong>Înmatriculare</strong><span></span>{{ car.registration }}</div>
+        <div class="car-detail-item"><strong>An de fabricație</strong><span></span>{{ car.year }}</div>
+        <div class="car-detail-item"><strong>Număr de locuri</strong><span></span>{{ car.seats }}</div>
+        <div class="car-detail-item"><strong>Tip caroserie</strong><span></span>{{ car.body_type }}</div>
+        <div class="car-detail-item"><strong>Rulaj</strong><span></span>{{ car.mileage }} km</div>
+        <div class="car-detail-item"><strong>Capacitate cilindrică</strong><span></span>{{ car.engine_capacity }}</div>
+        <div class="car-detail-item"><strong>Tip combustibil</strong><span></span>{{ car.fuel }}</div>
+        <div class="car-detail-item"><strong>Cutie de viteze</strong><span></span>{{ car.transmission }}</div>
+        <div class="car-detail-item"><strong>Tip tracțiune</strong><span></span>{{ car.drive_type }}</div>
+        <div class="car-detail-item"><strong>Culoare</strong><span></span>{{ car.color }}</div>
+
+        <!-- Price -->
+        <div class="price">{{ car.price }} €</div>
+
+        <a href="{{ url_for('catalog') }}" class="btn btn-outline-primary back-btn">Înapoi la Catalog</a>
+    </div>
+</div>
+
+{% endblock %}

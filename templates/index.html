@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Home | AutoLux Clone{% endblock %}
+
+{% block content %}
+
+
+   {% include 'partials/slider.html' %}
+
+    {% include 'recent_cars.html' %}
+
+    <p><a href="{{ url_for('catalog') }}" class="btn btn-primary">View Our Cars</a></p>
+{% endblock %}

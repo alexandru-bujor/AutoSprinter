@@ -1,0 +1,300 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+.bobdy {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+}
+
+/* Colors */
+:root {
+    --primary-color: #004080; /* Deep blue */
+    --secondary-color: #e6e6e6; /* Light gray */
+    --accent-color: #ffcc00; /* Bright yellow */
+    --text-color: #333333; /* Dark gray */
+    --background-color: #ffffff; /* White */
+}
+
+/* Layout */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header, .footer {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.main-content {
+    background-color: var(--background-color);
+    padding: 20px;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    padding: 10px 20px;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+@media (min-width: 992px) {
+    .navbar-expand-lg {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+}
+
+.navbar {
+    position: relative;
+    display: flex
+;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.navbar a {
+  
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navbar-brand{
+    max-width: 220px;
+}
+.navbar-img{
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.navbar a:hover {
+    color: var(--accent-color);
+}
+
+/* Buttons */
+.button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: darken(var(--accent-color), 10%);
+}
+
+/* Cards */
+.card {
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: var(--text-color);
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+}
+
+/*Recent Cars Section*/
+.recent-cars {
+    padding-top: 0.5em;
+    border-radius:16px;
+}
+
+.title-icon{
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 20px;
+}
+
+/* Hover Effect on Entire Product */
+.product {
+    transition: all 0.3s ease-out;
+    background: #F5F5F5;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 16px;
+}
+.dprod{
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.product:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+
+}
+
+/* Hover Overlay */
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Remove the blue underline from links */
+.nav-link, .title-prod, .prod_text a {
+    text-decoration: none; /* Remove underline */
+    color: #000; /* Default color (black) */
+}
+
+/* Change link color to the main color of the page (adjust this color based on your theme) */
+.nav-link:hover, .title-prod:hover, .prod_text a:hover {
+    color: #e74c3c; /* Example of a main color (red) */
+}
+
+/* For additional links that are inside the product card */
+.product:hover .prod_text a {
+    color: #e74c3c; /* Example of a main color (red) */
+}
+
+
+.product:hover .hover-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+/* Brazzers Button (small images) */
+.brazzers {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.brazzers_button {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    cursor: pointer;
+    opacity: 0; /* Start with buttons hidden */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.product:hover .brazzers_button {
+    opacity: 1; /* Show buttons on hover */
+    transform: scale(1.2); /* Slight zoom effect on the buttons */
+}
+
+/* Text and price styling */
+.prod_text {
+    padding: 1rem;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.product:hover .prod_text {
+    background-color: #f8f8f8; /* Light gray background on hover */
+}
+
+.txs {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.xprice {
+    font-size: 1.1rem;
+    color: #000; /* Red color for price */
+    font-weight: bold;
+}
+
+.xprice:hover {
+    font-size: 1.1rem;
+    color: #e74c3c; /* Red color for price */
+    font-weight: bold;
+}
+
+.char-item img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    text-align: center;
+    padding: 20px 0;
+    background: #1A1A1A;
+    display: block;
+    unicode-bidi: isolate;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

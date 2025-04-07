@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Catalog | AutoLux Clone{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <!-- FILTER SIDEBAR -->
+    <div class="col-12 col-lg-3 mb-4 mb-lg-0">
+      <div class="p-4 bg-light rounded shadow-sm">
+        <h1 class="mb-4 text-center">Microbuze</h1>
+        <form method="get" action="{{ url_for('catalog') }}" class="row gy-3 align-items-center">
+          <div class="col-12">
+            <label for="brand" class="visually-hidden">Marca</label>
+            <select class="form-select" id="brand" name="brand">
+              <option value="">Marca</option>
+              {% for brand in filter_options.brands %}
+              <option value="{{ brand }}" {% if request.args.get('brand') == brand %}selected{% endif %}>
+                {{ brand }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="model" class="visually-hidden">Modelul</label>
+            <select class="form-select" id="model" name="model">
+              <option value="">Modelul</option>
+              {% for model in filter_options.models %}
+              <option value="{{ model }}" {% if request.args.get('model') == model %}selected{% endif %}>
+                {{ model }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="year" class="visually-hidden">Anul fabricaţiei</label>
+            <select class="form-select" id="year" name="year">
+              <option value="">Anul fabricaţiei</option>
+              {% for year in filter_options.years %}
+              <option value="{{ year }}" {% if request.args.get('year') == year|string %}selected{% endif %}>
+                {{ year }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="seats" class="visually-hidden">Numărul de locuri</label>
+            <select class="form-select" id="seats" name="seats">
+              <option value="">Numărul de locuri</option>
+              {% for seat in filter_options.seats %}
+              <option value="{{ seat }}" {% if request.args.get('seats') == seat|string %}selected{% endif %}>
+                {{ seat }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-6">
+            <button type="submit" class="btn btn-primary w-100">Căutare</button>
+          </div>
+          <div class="col-6">
+            <a href="{{ url_for('catalog') }}" class="btn btn-secondary w-100">Resetează</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- CARS GRID SECTION -->
+    <div class="col-12 col-lg-9">
+      <div class="row g-4">
+        {% for car in cars %}
+            {% if car.model != 'Unknown Model' and car.model is not none %}
+<div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+    <article class="product" data-id="{{ car.id }}">
+        <a class="title-prod" href="{{ url_for('car_detail', slug=car.slug) }}">
+            <figure>
+                <img class="img img-fluid" src="{{ url_for('static', filename='foto_auto/' + car.slug + '/' + (car.images[0] if car.images else 'default.jpg')) }}" alt="{{ car.model }}">
+
+            </figure>
+        </a>
+        <div class="prod_text">
+            <h3 class="txs">{{ car.model }}</h3>
+            <div class="char-block cl_rf">
+                <div class="char-item">
+                    <img src="https://www.autolux.md/img/gas-station.svg" alt="Fuel">
+                    <span>{{ car.fuel }}</span>
+                </div>
+                <div class="char-item">
+                    <img src="https://www.autolux.md/img/engine.svg" alt="Engine">
+                    <span>{{ car.engine_capacity }}</span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center w-100">
+                <div class="xprice">{{ car.price }} €</div>
+            </div>
+        </div>
+    </article>
+</div>
+            {%  endif %}
+{% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/catalog.js') }}"></script>
+{% endblock %}

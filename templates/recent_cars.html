@@ -1,0 +1,36 @@
+<section class="recent-cars block_bg mb-3 bg-white">
+    <h2 class="title-icon"> Recent adăugate</h2>
+    <div class="row">
+        {% for car in cars %}
+            {% if car.model != 'Unknown Model' and car.model is not none %}
+        <div class="col-12 col-sm-6 dprod col-lg-4 col-xl-3">
+            <article class="product" data-id="{{ car.id }}">
+                <a class="title-prod" href="{{ url_for('car_detail', slug=car.slug) }}">
+                    <figure class="position-relative">
+                        <img class="img img-fluid" src="{{ url_for('static', filename='foto_auto/' + car.slug + '/' + (car.images[0] if car.images else 'default.jpg')) }}" alt="{{ car.model }}">
+
+                        <div class="hover-overlay">
+                            <div class="brazzers">
+                                {% for img in car.alt_images %}
+                                <div class="brazzers_button" data-alt-src="{{ img }}"></div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="prod_text">
+                        <h3 class="txs">{{ car.model }}</h3>
+                        <div class="char-block cl_rf">
+                            <div class="char-item"><img src="https://www.autolux.md/img/gas-station.svg"> <span>{{ car.fuel }}</span></div>
+                            <div class="char-item"><img src="https://www.autolux.md/img/engine.svg"> <span>{{ car.engine_capacity }}</span></div>
+                        </div>
+                        <div class="d-flex align-items-center w-100">
+                            <div class="xprice">{{ car.price }} €</div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        </div>
+            {%  endif %}
+        {% endfor %}
+    </div>
+</section>
